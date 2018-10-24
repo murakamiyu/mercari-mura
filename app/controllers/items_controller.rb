@@ -15,6 +15,8 @@ class ItemsController < ApplicationController
 
   def show
     @images = @item.images
+    @comments = @item.comments.includes(:user)
+    @comment = Comment.new
   end
 
   def new
