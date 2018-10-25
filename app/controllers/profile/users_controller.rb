@@ -1,6 +1,10 @@
 class Profile::UsersController < ApplicationController
   before_action :move_to_sign_in
 
+  def show
+     @user = User.find(params[:id])
+  end
+
   def edit
   end
 
