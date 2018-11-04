@@ -3,6 +3,7 @@ class Item < ApplicationRecord
   MAX_POST_IMAGES_LENGTH = 4
 
   has_many :images, dependent: :destroy
+  has_many :comments, dependent: :destroy
   belongs_to :seller, class_name: "User"
   belongs_to :buyer, class_name: "User", optional: true
   belongs_to :category

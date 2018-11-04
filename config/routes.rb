@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     collection do
       get 'search'
     end
+    resources :comments, only: [:show, :create, :edit, :update, :destroy]
   end
   resources :categories, only: [:show]
   resources :brands, only: [:show]
