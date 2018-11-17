@@ -8,24 +8,30 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.create(comments_params)
-    if @comment.save
+    if @comment.save!
       respond_to do |format|
         format.html
         format.json
       end
       # redirect_to item_path(params[:item_id]), notice: '投稿完了'
     else
-      render 'item_path', alert: '投稿失敗'
+      redirect_to item_path(params[:item_id]), alert: '投稿失敗'
     end
   end
 
   def edit
     @comment = Comment.find(params[:id])
+    @id_comment = Comment.find(params[:id]).id
   end
 
   def update
     comment = Comment.find(params[:id])
-    comment.update(comment: comments_params[:comment]) 
+    if comment.update(message: comments_params[:message])
+      # @comment = Comment.find(params[:id]) 
+      # @id_comment = Comment.find(params[:id]).id
+    else
+      render 'item_path', alert: '編集失敗'
+    end
   end
 
   def destroy
@@ -35,7 +41,7 @@ class CommentsController < ApplicationController
 
   private
   def comments_params
-  	params.permit(:id, :comment, :user_id, :item_id)
+  	params.require(:comment).permit(:id, :message, :user_id, :item_id)
   end
 
   def move_to_sign_in

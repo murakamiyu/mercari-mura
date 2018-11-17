@@ -1,0 +1,6 @@
+<div id="edit_point" data-comment="<%= @id_comment %>">
+  <%= form_for @comment,:url => {:action => :update}, id: "new_comment", class: "message-form", remote: true do |f| %>
+    <%= f.text_area :message, id: "comment_send", class: "textarea-default", rows: "5", value: "" %>
+    <%= f.submit 'コメント編集', data: { confirm: '投稿しますか？' }, class: 'message-submit  btn-red' %>
+  <% end %>
+</div>

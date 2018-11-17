@@ -1,5 +1,5 @@
 $(function() {
-  $(document).on('turbolinks:load', function() {
+  // $(document).on('turbolinks:load', function() {
 
     function buildNEW(comment) {
       var html = `
@@ -17,7 +17,7 @@ $(function() {
                     <div id="${comment.id}" class="message-body">
                       <div id="hide-comment">
                         <div class="message-body-text">
-                          ${comment.comment}
+                          ${comment.message}
                         </div>
                         <div class="message-icons clearfix">
                           <time class="message-icon-left">
@@ -33,9 +33,14 @@ $(function() {
                             </form>
                           </div>
                           <div class="message-icon-right margin-right">
-                            <%= link_to  "/items/${comment.item_id}/comments/${comment.id}/edit", id: "edit-switch", class: "edit-btn" do %>
+                            <a href="/items/${comment.item_id}/comments/${comment.id}", method: :delete, id: "delete-switch", class: "edit-btn">
+                              <i class="material-icons">delete</i>
+                            </a>
+                          </div>
+                          <div class="message-icon-right margin-right">
+                            <a href="/items/${comment.item_id}/comments/${comment.id}/edit", id: "edit-switch", class: "edit-btn">
                               <i class="material-icons">edit</i>
-                            <% end %>
+                            </a>
                           </div>
                         </div>
                       </div>
@@ -47,7 +52,7 @@ $(function() {
 
   function buildEDIT(comment) {
     var html = `
-            <textarea id="comment-edit", class="edit-form-comment textarea-default", rows: "5", value: "" %>${comment.comment}</textarea>
+            <textarea id="comment-edit", class="edit-form-comment textarea-default", rows: "5", value: "" %>${comment.message}</textarea>
             <a id="comment-cancel" class="edit-menu" href="/items/${comment.item_id}/comments/${comment.id}">戻る</a>
             <a id="comment-delete" class="edit-menu margin-edit" href="/items/${comment.item_id}/comments/${comment.id}">削除</a>
             <a id="comment-update" class="edit-menu margin-edit" href="/items/${comment.item_id}/comments/${comment.id}">更新</a>
@@ -71,7 +76,7 @@ $(function() {
                     <div id="${comment.id}" class="message-body">
                       <div id="hide-comment">
                         <div class="message-body-text">
-                          ${comment.comment}
+                          ${comment.message}
                         </div>
                         <div class="message-icons clearfix">
                           <time class="message-icon-left">
@@ -102,7 +107,7 @@ $(function() {
     function buildBACK(comment) {
       var html = `
                     <div class="message-body-text">
-                      ${comment.comment}
+                      ${comment.message}
                     </div>
                     <div class="message-icons clearfix">
                       <time class="message-icon-left">
@@ -128,32 +133,32 @@ $(function() {
     }
 
 　//新規投稿
-  $('#new_comment').on('submit', function(e){
-    e.preventDefault();
-    var wordCount =  $('#comment_send').val().length
-    if (wordCount != 0){
-    var formData = new FormData(this);
-    var url = $(this).attr('action');
-    console.log(url, formData);
-      $.ajax({
-        url: url,
-        type: "POST",
-        data: formData,
-        dataType: 'json',
-        processData: false,
-        contentType: false
-      })
-      .done(function(data){
-        console.log(data)
-        var html = buildNEW(data);
-        $('.message-items').append(html)
-        $('#comment_send').val('')
-      })
-      .fail(function(){
-        alert('error');
-      })
-    }
-  });
+   $('#new_comment').on('submit', function(e){
+     e.preventDefault();
+     var wordCount =  $('#comment_send').val().length
+     if (wordCount != 0){
+     var formData = new FormData(this);
+     var url = $(this).attr('action');
+     console.log(url, formData);
+       $.ajax({
+         url: url,
+         type: "POST",
+         data: formData,
+         dataType: 'json',
+         processData: false,
+         contentType: false
+       })
+       .done(function(data){
+         console.log(data)
+         var html = buildNEW(data);
+         $('.message-items').append(html)
+         $('#comment_send').val('')
+       })
+       .fail(function(){
+         alert('error');
+       })
+     }
+   });
 
   //編集機能　編集画面表示
   $(document).on('click', '#edit-switch', function(e){
@@ -221,7 +226,7 @@ $(function() {
         dataType: 'json'
       })
       .done(function(){
-        window.location.href = '/items';
+        window.location.href = '/';
       })
       .fail(function(){
         alert('error');
@@ -248,5 +253,5 @@ $(function() {
         alert('error');
       })
   });
-  });
+  // });
 });
