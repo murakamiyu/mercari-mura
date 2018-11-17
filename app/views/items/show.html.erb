@@ -154,17 +154,18 @@
     <div class="item-detail-message">
       <div class="message-container">
         <div class="message-content">
-          <ul class="message-items">
+          <ul id="comments_list" class="message-items">
             <% if @comments %>
               <%= render partial: "comment", collection: @comments %>
             <% end %>
           </ul>
          </div>
         <div class="message-content">
-          <%= form_for [@item, @comment], id: "new_comment", class: "message-form" do |f| %>
+          <%= form_for [@item, @comment], id: "new_comment", class: "message-form"  do |f| %>
+            <%= f.hidden_field :id, value:"" %>
             <%= f.hidden_field :user_id, value: current_user.id %>
             <%= f.hidden_field :item_id, value: @item.id %>
-            <%= f.text_area :comment,id: "comment_send", class: "textarea-default", rows: "5", value: "" %>
+            <%= f.text_area :message,id: "comment_send", class: "textarea-default", rows: "5", value: "" %>
             <button type="submit" class="message-submit btn-default btn-red" >
               <span>
                 コメント

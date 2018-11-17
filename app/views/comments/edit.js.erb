@@ -1,0 +1,29 @@
+$('#edit_point[data-comment="<%= @id_comment %>"]').html("<%= escape_javascript(render 'comments/edit') %>");
+
+// document.addEventListener('DOMContentLoaded', function() {
+// 	var ep = document.getElementById('edit_point');
+// 	var html = "<%= escape_javascript(render 'comments/edit') %>"
+// 	console.log(html);
+// 	ep.addEventListener('click', function(e) {
+// 		var num = e.target.getAttribute('data-comment');
+// 		var target = document.getElementById("52");
+// 		console.log(num, target);
+// 		if (num) {
+// 			target.innerHTML= html;
+// 			//ep.replaceChild("<%= escape_javascript(render 'comments/edit') %>", ep.lastChild);  
+// 		} else {
+// 			window.alert(numなし);
+// 		}
+// 	}, false);
+// }, false);
+// // document.addEventListener('DOMContentLoaded', function() {
+// // 	var dataComment = document.getElementById('edit_point');
+
+// // 	dataComment.addEventListener('click', function(e) {
+// // 		var target = e.target.getAttribute('data-comment');
+// // 		console.log(target);
+// // 	}, false);
+// // }, false);
+
+
+//$('.row[data-comment="'+ @id_comment +'"]').parent().html("<%= escape_javascript(render 'comments/edit') %>");

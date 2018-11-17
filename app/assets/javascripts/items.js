@@ -1,5 +1,5 @@
 $(function() {
-  $(document).on('turbolinks:load', function() {
+
     $('#thumb0').hover(function() {
       $('#image0').css('display','block'),
       $('#image1').css('display','none');
@@ -24,5 +24,5 @@ $(function() {
       $('#image2').css('display','none');
       $('#image3').css('display','block');
     });
-  });
+  
 });
